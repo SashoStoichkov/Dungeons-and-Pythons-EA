@@ -125,7 +125,7 @@ class Dungeon():
                     elif m[x][y-1] == "E":
                         print("Fight!")
                         time.sleep(1.5)
-                    elif m[x][y+1] == "G":
+                    elif m[x][y-1] == "G":
                         print("Goal reached!")
                         time.sleep(1.5)
                         break
@@ -142,8 +142,12 @@ class Dungeon():
                 time.sleep(1.5)
 
 map1 = Dungeon("dungeons/level1.txt")
+map2 = Dungeon("dungeons/level2.txt")
 
-m = map1.create_matrix()
-map1.spawn(m)
+m1 = map1.create_matrix()
+map1.spawn(m1)
 
-map1.move_hero(m)
+m2 = map2.create_matrix()
+map1.spawn(m2)
+
+map1.move_hero(m2)
