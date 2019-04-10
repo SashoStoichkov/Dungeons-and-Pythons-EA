@@ -1,4 +1,4 @@
-import sys, tty, termios, subprocess, time
+import sys, tty, termios, subprocess, time, random
 
 class _Getch:
     def __call__(self):
@@ -76,13 +76,13 @@ class Dungeon():
 
                 if x + move_x >= 0 and x + move_x < len(m) and y + move_y >= 0 and y + move_y < len(m[0]) and m[x + move_x][y + move_y] != '#':
                     if m[x + move_x][y + move_y] == "T":
-                        print("Found treasure!")
+                        self.pick_treasure()
                         time.sleep(1.5)
                     elif m[x + move_x][y + move_y] == "E":
                         print("Fight!")
                         time.sleep(1.5)
                     elif m[x + move_x][y + move_y] == "G":
-                        print("Goal reached!")
+                        self.goal_reached()
                         time.sleep(1.5)
                         break
 
@@ -97,14 +97,20 @@ class Dungeon():
                 print("Invalid key")
                 time.sleep(1.5)
 
+    def pick_treasure(self):
+        print("Treasure picked!")
 
-map1 = Dungeon("dungeons/level1.txt")
-map2 = Dungeon("dungeons/level2.txt")
+    def goal_reached(self):
+        print("You reached the goal! CONGRATS!")
+        return True
 
-m1 = map1.create_matrix()
-map1.spawn(m1)
+# map1 = Dungeon("dungeons/level1.txt")
+# map2 = Dungeon("dungeons/level2.txt")
 
-m2 = map2.create_matrix()
-map1.spawn(m2)
+# m1 = map1.create_matrix()
+# map1.spawn(m1)
 
-map1.move_hero(m2)
+# m2 = map2.create_matrix()
+# map1.spawn(m2)
+
+# map1.move_hero(m2)
