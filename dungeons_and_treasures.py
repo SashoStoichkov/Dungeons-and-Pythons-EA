@@ -141,13 +141,13 @@ class Dungeon():
                 print("Invalid key")
                 time.sleep(1.5)
 
-map1 = Dungeon("dungeons/level1.txt")
-map2 = Dungeon("dungeons/level2.txt")
+# map1 = Dungeon("dungeons/level1.txt")
+# map2 = Dungeon("dungeons/level2.txt")
 
-m1 = map1.create_matrix()
-map1.spawn(m1)
+# m1 = map1.create_matrix()
+# map1.spawn(m1)
 
-m2 = map2.create_matrix()
-map1.spawn(m2)
+# m2 = map2.create_matrix()
+# map1.spawn(m2)
 
-map1.move_hero(m2)
+# map1.move_hero(m2)
