@@ -103,14 +103,3 @@ class Dungeon():
     def goal_reached(self):
         print("You reached the goal! CONGRATS!")
         return True
-
-# map1 = Dungeon("dungeons/level1.txt")
-# map2 = Dungeon("dungeons/level2.txt")
-
-# m1 = map1.create_matrix()
-# map1.spawn(m1)
-
-# m2 = map2.create_matrix()
-# map1.spawn(m2)
-
-# map1.move_hero(m2)
