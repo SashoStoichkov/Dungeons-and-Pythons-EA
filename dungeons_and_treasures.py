@@ -74,7 +74,7 @@ class Dungeon():
                     move_x = 0
                     move_y = -1
 
-                if x + move_x >= 0 and x + move_x < len(m) and y + move_y >= 0 and y + move_y < len(m) and m[x + move_x][y + move_y] != '#':
+                if x + move_x >= 0 and x + move_x < len(m) and y + move_y >= 0 and y + move_y < len(m[0]) and m[x + move_x][y + move_y] != '#':
                     if m[x + move_x][y + move_y] == "T":
                         print("Found treasure!")
                         time.sleep(1.5)
@@ -98,13 +98,13 @@ class Dungeon():
                 time.sleep(1.5)
 
 
-# map1 = Dungeon("dungeons/level1.txt")
-# map2 = Dungeon("dungeons/level2.txt")
+map1 = Dungeon("dungeons/level1.txt")
+map2 = Dungeon("dungeons/level2.txt")
 
-# m1 = map1.create_matrix()
-# map1.spawn(m1)
+m1 = map1.create_matrix()
+map1.spawn(m1)
 
-# m2 = map2.create_matrix()
-# map1.spawn(m2)
+m2 = map2.create_matrix()
+map1.spawn(m2)
 
-# map1.move_hero(m2)
+map1.move_hero(m2)
