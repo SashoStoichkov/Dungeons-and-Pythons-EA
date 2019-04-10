@@ -56,82 +56,38 @@ class Dungeon():
 
             x, y = self.find_coordinates(m, "H")
 
-            if k =='\x1b[A':
-                if x-1 >= 0 and m[x-1][y] != "#":
-                    if m[x-1][y] == "T":
+            if k in ['\x1b[A', '\x1b[B', '\x1b[C', '\x1b[D']:
+
+                if k == '\x1b[A':
+                    move_x = -1
+                    move_y = 0
+
+                elif k == '\x1b[B':
+                    move_x = 1
+                    move_y = 0
+
+                elif k == '\x1b[C':
+                    move_x = 0
+                    move_y = 1
+
+                elif k == '\x1b[D':
+                    move_x = 0
+                    move_y = -1
+
+                if x + move_x >= 0 and x + move_x < len(m) and y + move_y >= 0 and y + move_y < len(m) and m[x + move_x][y + move_y] != '#':
+                    if m[x + move_x][y + move_y] == "T":
                         print("Found treasure!")
                         time.sleep(1.5)
-                    elif m[x-1][y] == "E":
+                    elif m[x + move_x][y + move_y] == "E":
                         print("Fight!")
                         time.sleep(1.5)
-                    elif m[x-1][y] == "G":
+                    elif m[x + move_x][y + move_y] == "G":
                         print("Goal reached!")
                         time.sleep(1.5)
                         break
 
                     m[x][y] = "."
-                    m[x-1][y] = "H"
-
-                else:
-                    print("You can't go there!")
-                    time.sleep(1.5)
-
-            elif k == '\x1b[B':
-                if x+1 < len(m) and m[x+1][y] != "#":
-                    if m[x+1][y] == "T":
-                        print("Found treasure!")
-                        time.sleep(1.5)
-                    elif m[x+1][y] == "E":
-                        print("Fight!")
-                        time.sleep(1.5)
-                    elif m[x+1][y] == "G":
-                        print("Goal reached!")
-                        time.sleep(1.5)
-                        break
-
-                    m[x][y] = "."
-                    m[x+1][y] = "H"
-
-                else:
-                    print("You can't go there!")
-                    time.sleep(1.5)
-
-            elif k == '\x1b[C':
-                if y+1 < len(m[0]) and m[x][y+1] != "#":
-                    if m[x][y+1] == "T":
-                        print("Found treasure!")
-                        time.sleep(1.5)
-                    elif m[x][y+1] == "E":
-                        print("Fight!")
-                        time.sleep(1.5)
-                    elif m[x][y+1] == "G":
-                        print("Goal reached!")
-                        time.sleep(1.5)
-                        break
-
-                    m[x][y] = "."
-                    m[x][y+1] = "H"
-
-                else:
-                    print("You can't go there!")
-                    time.sleep(1.5)
-
-                    
-            elif k == '\x1b[D':
-                if y-1 >= 0 and m[x][y-1] != "#":
-                    if m[x][y-1] == "T":
-                        print("Found treasure!")
-                        time.sleep(1.5)
-                    elif m[x][y-1] == "E":
-                        print("Fight!")
-                        time.sleep(1.5)
-                    elif m[x][y-1] == "G":
-                        print("Goal reached!")
-                        time.sleep(1.5)
-                        break
-
-                    m[x][y] = "."
-                    m[x][y-1] = "H"
+                    m[x + move_x][y + move_y] = "H"
 
                 else:
                     print("You can't go there!")
@@ -140,6 +96,7 @@ class Dungeon():
             else:
                 print("Invalid key")
                 time.sleep(1.5)
+
 
 # map1 = Dungeon("dungeons/level1.txt")
 # map2 = Dungeon("dungeons/level2.txt")
