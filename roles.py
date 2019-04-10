@@ -8,6 +8,8 @@ class Role:
         self._current_health = health
         self._max_mana = mana
         self._current_mana = mana
+        self._current_weapon = None
+        self._current_spell = None
 
     def get_health(self):
         return self._current_health
@@ -57,6 +59,15 @@ class Role:
 
         self._current_spell = spell
 
+    def get_weapon_damage(self):
+        if self._current_weapon != None:
+            return self._current_weapon.damage
+        return 0
+
+    def get_spell_damage(self):
+        if self._current_spell != None:
+            return self._current_spell.damage
+        return 0
 
     def attack(self, by=None):
         if by == 'weapon':
