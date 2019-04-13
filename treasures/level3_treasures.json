@@ -1,0 +1,60 @@
+{
+    "treasures": [
+        {
+            "type": "Weapon",
+            "dict": {
+                "_name": "The Axe of Destiny",
+                "_damage": 20
+            }
+        },
+        {
+            "type": "Weapon",
+            "dict": {
+                "_name": "The Blade of Bravery",
+                "_damage": 35
+            }
+        },
+        {
+            "type": "Spell",
+            "dict": {
+                "_name": "Fireball",
+                "_damage": 30,
+                "_mana_cost": 50,
+                "_cast_range": 2
+            }
+        },
+        {
+            "type": "Spell",
+            "dict": {
+                "_name": "Thunderstorm",
+                "_damage": 50,
+                "_mana_cost": 50,
+                "_cast_range": 3
+            }
+        },
+        {
+            "type": "HealthPotion",
+            "dict": {
+                "_points": 50
+            }
+        },
+        {
+            "type": "HealthPotion",
+            "dict": {
+                "_points": 70
+            }
+        },
+        {
+            "type": "ManaPotion",
+            "dict": {
+                "_points": 60
+            }
+        },
+        {
+            "type": "ManaPotion",
+            "dict": {
+                "_points": 35
+            }
+        }
+    ]
+}

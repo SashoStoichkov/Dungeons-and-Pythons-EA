@@ -1,0 +1,32 @@
+{
+    "treasures": [
+        {
+            "type": "Weapon",
+            "dict": {
+                "_name": "The Axe of Destiny",
+                "_damage": 20
+            }
+        },
+        {
+            "type": "Spell",
+            "dict": {
+                "_name": "Fireball",
+                "_damage": 30,
+                "_mana_cost": 50,
+                "_cast_range": 2
+            }
+        },
+        {
+            "type": "HealthPotion",
+            "dict": {
+                "_points": 50
+            }
+        },
+        {
+            "type": "ManaPotion",
+            "dict": {
+                "_points": 80
+            }
+        }
+    ]
+}
