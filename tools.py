@@ -11,6 +11,12 @@ class Tool:
     @property
     def damage(self):
         return self._damage
+
+    def __str__(self):
+        return '{}, Damage {}'.format(self._name, self._damage)
+
+    def __repr__(self):
+        return self.__str__()
     
     @staticmethod
     def validate_parameters(name, damage):
@@ -45,7 +51,13 @@ class Spell(Tool):
     @property
     def cast_range(self):
         return self._cast_range
+
+    def __str__(self):
+        return super().__str__() + ', Mana cost {}, Cast range {}'.format(self._mana_cost, self._cast_range)
     
+    def __repr__(self):
+        return self.__str__()
+
     @staticmethod
     def validate_init_parameters(mana_cost, cast_range):
         if not isinstance(mana_cost, int) and not isinstance(mana_cost, float):

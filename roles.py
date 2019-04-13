@@ -11,6 +11,30 @@ class Role:
         self._current_weapon = None
         self._current_spell = None
 
+    @property
+    def max_health(self):
+        return self._max_health
+    
+    @property
+    def current_health(self):
+        return self._current_health
+
+    @property
+    def max_mana(self):
+        return self._max_mana
+    
+    @property
+    def current_mana(self):
+        return self._current_mana
+    
+    @property
+    def current_weapon(self):
+        return self._current_weapon
+
+    @property
+    def current_spell(self):
+        return self._current_spell
+    
     def get_health(self):
         return self._current_health
 

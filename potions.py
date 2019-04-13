@@ -20,7 +20,19 @@ class ManaPotion(Potion):
     def __init__(self, points):
         super().__init__(points)
 
+    def __str__(self):
+        return 'Mana potion {}'.format(self._points)
+
+    def __repr__(self):
+        return self.__str__()
+
 
 class HealthPotion(Potion):
     def __init__(self, points):
         super().__init__(points)
+
+    def __str__(self):
+        return 'Health potion {}'.format(self._points)
+
+    def __repr__(self):
+        return self.__str__()
