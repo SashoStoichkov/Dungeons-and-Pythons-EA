@@ -45,7 +45,7 @@ class Dungeon():
 
         return coor
 
-    def move_hero(self, m):
+    def move(self, m):
         key = _Getch()
 
         while True:
@@ -93,6 +93,8 @@ class Dungeon():
                     print("You can't go there!")
                     time.sleep(1.5)
 
+                self.move_enemy(m)
+
             else:
                 print("Invalid key")
                 time.sleep(1.5)
@@ -103,3 +105,56 @@ class Dungeon():
     def goal_reached(self):
         print("You reached the goal! CONGRATS!")
         return True
+
+    def move_enemy(self, m):
+        coor = []
+        for a in range(len(m)):
+            for b in range(len(m[0])):
+                if m[a][b] == "E":
+                    coor.append((a, b))
+
+        for c in coor:
+            a = c[0]
+            b = c[1]
+            poss_dir_e = []
+
+            if a-1 >= 0 and m[a-1][b] != "#":
+                poss_dir_e.append("up")
+            if a+1 < len(m) and m[a+1][b] != "#":
+                poss_dir_e.append("down")
+            if b-1 >= 0 and m[a][b-1] != "#":
+                poss_dir_e.append("left")
+            if b+1 < len(m[0]) and m[a][b+1] != "#":
+                poss_dir_e.append("right")
+
+            rand_index = random.randint(0, len(poss_dir_e)-1)
+
+            if poss_dir_e[rand_index] == "up":
+                move_a = -1
+                move_b = 0
+
+            elif poss_dir_e[rand_index] == "down":
+                move_a = 1
+                move_b = 0
+
+            elif poss_dir_e[rand_index] == "right":
+                move_a = 0
+                move_b = 1
+
+            elif poss_dir_e[rand_index] == "left":
+                move_a = 0
+                move_b = -1
+
+            if m[a + move_a][b + move_b] == "T":
+                print("Enemy found treasure!")
+                time.sleep(1.5)
+
+            elif m[a + move_a][b + move_b] == "H":
+                print("Enemy Fight!")
+                time.sleep(1.5)
+                break
+            elif m[a + move_a][b + move_b] == "G":
+                break
+
+            m[a][b] = "."
+            m[a + move_a][b + move_b] = "E"
