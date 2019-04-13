@@ -1,19 +1,19 @@
-import dungeons_and_treasures as dt
+from dungeons_and_treasures import *
+from roles import Hero
 
 if __name__ == "__main__":
-    map1 = dt.Dungeon("dungeons/level1.txt")
-    map2 = dt.Dungeon("dungeons/level2.txt")
-    map3 = dt.Dungeon("dungeons/level3.txt")
+    hero = Hero(name="Bron", title="Dragonslayer", health=100, mana=100, mana_regeneration_rate=2)
 
-    m1 = map1.create_matrix()
-    map1.spawn(m1)
+    map1 = Dungeon("dungeons/level1.txt", 'treasures/level1_treasures.json', hero)
+    map2 = Dungeon("dungeons/level2.txt", 'treasures/level2_treasures.json', hero)
+    map3 = Dungeon("dungeons/level3.txt", 'treasures/level3_treasures.json', hero)
 
-    m2 = map2.create_matrix()
-    map1.spawn(m2)
+    map1.spawn()
 
-    m3 = map3.create_matrix()
-    map1.spawn(m3)
+    map2.spawn()
 
-    map1.move_hero(m1)
-    map2.move_hero(m2)
-    map3.move_hero(m3)
+    map3.spawn()
+
+    map1.move_hero()
+    map2.move_hero()
+    map3.move_hero()
