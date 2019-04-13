@@ -135,6 +135,19 @@ class Hero(Role):
         else:
             self._current_mana += self._mana_regeneration_rate + mana_points
 
+    def choose_attack(self, enemy):
+        if isinstance(enemy, Enemy):
+            if self.get_weapon_damage() > self.get_spell_damage():
+                    print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.__name__, self.get_weapon_damage(), enemy._current_health))
+                    enemy.take_damage(self.attack(by="weapon"))
+                
+            else:
+                if self.can_cast(self._current_spell):
+                    print("Hero casts a {} for {} damage. Enemy health is {}".format(self._current_spell.__name__, self.get_spell_damage(), enemy._current_health))
+                    enemy.take_damage(self.attack(by="magic"))
+                else:
+                    print("Hero does not have mana for another {}.".format(self._current_spell))
+
     @staticmethod
     def validate_init_parameters(name, title, mana_regeneration_rate):
         if not isinstance(name, str):
@@ -168,6 +181,19 @@ class Enemy(Role):
             self._current_mana = self._max_mana
         else:
             self._current_mana += mana_points
+
+    def choose_attack(self, hero):
+        if isinstance(hero, Hero):
+            if self.get_weapon_damage() > self.get_spell_damage():
+                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.__name__, self.get_weapon_damage(), hero._current_health))
+                    hero.take_damage(self.attack(by="weapon"))
+                
+            else:
+                if self.can_cast(self._current_spell):
+                    print("Enemy casts a {} for {} damage. Hero health is {}".format(self._current_spell.__name__, self.get_spell_damage(), hero._current_health))
+                    hero.take_damage(self.attack(by="magic"))
+                else:
+                    print("Enemy does not have mana for another {}.".format(self._current_spell))
 
     @staticmethod
     def validate_init_parameters(damage):
