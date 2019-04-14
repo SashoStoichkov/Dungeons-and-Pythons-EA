@@ -178,13 +178,13 @@ class Dungeon():
             b = enemy.coordinates[1]
             possible_directions = []
 
-            if a-1 >= 0 and self._level_map[a-1][b] not in ["#", 'E']:
+            if a-1 >= 0 and self._level_map[a-1][b] not in ["#", 'E', 'G']:
                 possible_directions.append("up")
-            if a+1 < len(self._level_map) and self._level_map[a+1][b] not in ["#", 'E']:
+            if a+1 < len(self._level_map) and self._level_map[a+1][b] not in ["#", 'E', 'G']:
                 possible_directions.append("down")
             if b-1 >= 0 and self._level_map[a][b-1] not in ["#", 'E']:
                 possible_directions.append("left")
-            if b+1 < len(self._level_map[0]) and self._level_map[a][b+1] not in ["#", 'E']:
+            if b+1 < len(self._level_map[0]) and self._level_map[a][b+1] not in ["#", 'E', 'G']:
                 possible_directions.append("right")
 
             if len(possible_directions) == 0:
@@ -211,11 +211,11 @@ class Dungeon():
                 break
 
             elif self._level_map[a + move_a][b + move_b] == "H":
-                time.sleep(1.5)
-                break
-
-            elif self._level_map[a + move_a][b + move_b] == "G":
-                break
+                if fight(self._hero, enemy) == 1:
+                    self._enemies.remove(enemy)
+                    time.sleep(1.5)
+                else:
+                    sys.exit(0)
 
             self._level_map[a][b] = "."
             self._level_map[a + move_a][b + move_b] = "E"
