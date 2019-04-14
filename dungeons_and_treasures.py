@@ -87,7 +87,12 @@ class Dungeon():
 
         return coor
 
-    def move_hero(self, hero, enemy):
+    def identify_enemy(self, coordinates):
+        for enemy in self._enemies:
+            if enemy.coordinates == coordinates:
+                return enemy
+
+    def move_hero(self):
         key = _Getch()
 
         while self._hero.is_alive():
@@ -123,8 +128,9 @@ class Dungeon():
                         time.sleep(1.5)
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
-                        if isinstance(hero, Hero) and isinstance(enemy, Enemy):
-                            fight(hero, enemy)
+                        enemy = self.identify_enemy([x + move_x, y + move_y])
+                        if isinstance(self._hero, Hero) and isinstance(enemy, Enemy):
+                            fight(self._hero, enemy)
                             time.sleep(1.5)
 
                     elif self._level_map[x + move_x][y + move_y] == "G":
