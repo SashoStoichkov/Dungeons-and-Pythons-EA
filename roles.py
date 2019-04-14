@@ -188,15 +188,29 @@ class Hero(Role):
 
 
 class Enemy(Role):
-    def __init__(self, health, mana, damage):
+    def __init__(self, health, mana, damage, coordinates):
         super().__init__(health, mana)
-        self.validate_init_parameters(damage)
+        self.validate_init_parameters(damage, coordinates)
         self._damage = damage
+        self._coordinates = coordinates
 
     @property
     def damage(self):
         return self._damage
-    
+
+    @property
+    def coordinates(self):
+        return self._coordinates
+
+    @coordinates.setter
+    def coordinates(self, new_coordinates):
+        if not isinstance(new_coordinates, list):
+            raise TypeError('Coordinates must be stored in a list!')
+        if len(new_coordinates) != 2:
+            raise ValueError('Enemy must have exactly 2 coordinates!')
+
+        self.coordinates = new_coordinates
+
     def take_mana(self, mana_points):
         if not isinstance(mana_points, int) and not isinstance(mana_points, float):
             raise TypeError('Mana points must be either integer or float!')
@@ -220,9 +234,15 @@ class Enemy(Role):
                     print("Enemy does not have mana for another {}.".format(self._current_spell))
 
     @staticmethod
-    def validate_init_parameters(damage):
+    def validate_init_parameters(damage, coordinates):
         if not isinstance(damage, int) and not isinstance(damage, float):
             raise TypeError('Damage must be either integer or float!')
 
         if damage < 0:
             raise ValueError('Damage must be non-negative!')
+
+        if not isinstance(coordinates, list):
+            raise TypeError('Coordinates must be stored in a list!')
+
+        if len(coordinates) != 2:
+            raise ValueError('Enemy must have exactly 2 coordinates!')
