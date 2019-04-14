@@ -97,7 +97,6 @@ class Role:
         if by == 'weapon':
             if self._current_weapon != None:
                 weapon_to_use = self._current_weapon
-                self._current_weapon = None
                 return (weapon_to_use, weapon_to_use.damage)
             else:
                 return (None, 0)
@@ -106,7 +105,6 @@ class Role:
             if self._current_spell != None:
                 self._current_mana -= self._current_spell.mana_cost
                 spell_to_use = self._current_spell
-                self._current_spell = None
                 return (spell_to_use, spell_to_use.damage)
             else:
                 return (None, 0)
@@ -238,7 +236,7 @@ class Enemy(Role):
         if self.get_weapon_damage() > self.get_spell_damage():
             weapon, damage = self.attack(by='weapon')
             hero.take_damage(damage)
-            print("Enemy hits with {} for {} damage. Hero health is {}".format(self.weapon.name, damage, hero.current_health))
+            print("Enemy hits with {} for {} damage. Hero health is {}".format(weapon.name, damage, hero.current_health))
 
         elif self._current_spell != None:
             if self.can_cast(self._current_spell):
@@ -250,7 +248,7 @@ class Enemy(Role):
                 if self._current_weapon != None:
                     weapon, damage = self.attack(by='weapon')
                     hero.take_damage(damage)
-                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self.weapon.name, damage, hero.current_health))
+                    print("Enemy hits with {} for {} damage. Hero health is {}".format(weapon.name, damage, hero.current_health))
                 else:
                     print('Enemy does not have any weapon to use!')
 
