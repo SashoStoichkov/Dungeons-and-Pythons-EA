@@ -230,7 +230,6 @@ class Enemy(Role):
         if self.get_weapon_damage() > self.get_spell_damage():
             hero.take_damage(self.attack(by='weapon'))
             print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.name, self._current_weapon.damage, hero.current_health))
-
         elif self._current_spell != None:
             if self.can_cast(self._current_spell):
                 hero.take_damage(self.attack(by='magic'))

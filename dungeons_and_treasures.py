@@ -206,8 +206,9 @@ class Dungeon():
                 move_b = -1
 
             if self._level_map[a + move_a][b + move_b] == "T":
-                print("Enemy found treasure!")
-                time.sleep(1.5)
+                # print("Enemy found treasure!")
+                # time.sleep(1.5)
+                break
 
             elif self._level_map[a + move_a][b + move_b] == "H":
                 time.sleep(1.5)
