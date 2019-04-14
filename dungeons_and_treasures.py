@@ -1,6 +1,7 @@
 import sys, tty, termios, subprocess, time, random, json
 from tools import Weapon, Spell
 from potions import ManaPotion, HealthPotion
+from roles import Enemy
 
 class _Getch:
     def __call__(self):
@@ -47,10 +48,25 @@ class Parser:
 
         return treasure_objects
 
+    @classmethod
+    def parse_enemies(cls, enemies_file):
+        enemies = []
+
+        with open(enemies_file, 'r') as file:
+            enemies_list = json.load(file)['enemies']
+        for enemy in enemies_list:
+            new_enemy = Enemy(enemy['health'], enemy['mana'], enemy['damage'], enemy['coordinates'])
+            enemies.append(new_enemy)
+
+        return enemies
+
+
+
 class Dungeon():
-    def __init__(self, level_map, treasures, hero):
+    def __init__(self, level_map, treasures, enemies, hero):
         self._level_map = Parser.parse_matrix(level_map)
         self._treasures_list = Parser.parse_treasures(treasures)
+        self._enemies = Parser.parse_enemies(enemies)
         self._hero = hero
 
     def print_map(self):
@@ -146,15 +162,9 @@ class Dungeon():
         return True
 
     def move_enemy(self):
-        enemy_coordinates = []
-        for a in range(len(self._level_map)):
-            for b in range(len(self._level_map[0])):
-                if self._level_map[a][b] == "E":
-                    enemy_coordinates.append((a, b))
-
-        for coor in enemy_coordinates:
-            a = coor[0]
-            b = coor[1]
+        for enemy in self._enemies:
+            a = enemy.coordinates[0]
+            b = enemy.coordinates[1]
             possible_directions = []
 
             if a-1 >= 0 and self._level_map[a-1][b] != "#":
