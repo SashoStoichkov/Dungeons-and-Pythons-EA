@@ -129,9 +129,11 @@ class Dungeon():
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
                         enemy = self.identify_enemy([x + move_x, y + move_y])
-                        if isinstance(self._hero, Hero) and isinstance(enemy, Enemy):
-                            fight(self._hero, enemy)
+                        if fight(self._hero, enemy) == 1:
+                            self._enemies.remove(enemy)
                             time.sleep(1.5)
+                        else:
+                            sys.exit(0)
 
                     elif self._level_map[x + move_x][y + move_y] == "G":
                         self.goal_reached()

@@ -8,10 +8,12 @@ def fight(hero, enemy):
         while True:
             if hero.is_alive() == False:
                 print("Hero is Dead!")
-                sys.exit(0)
-            elif enemy.is_alive() == False:
-                print("Enemy is Dead!")
-                break
+                return 0
 
             hero.choose_attack(enemy)
+
+            if enemy.is_alive() == False:
+                print("Enemy is Dead!")
+                return 1
+
             enemy.choose_attack(hero)
