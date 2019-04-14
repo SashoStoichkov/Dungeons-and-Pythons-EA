@@ -89,7 +89,7 @@ class Dungeon():
     def move_hero(self):
         key = _Getch()
 
-        while True:
+        while self._hero.is_alive():
             subprocess.call(["clear"])
             self.print_map()
             print("Enter direction (use arrow keys)")
@@ -130,10 +130,10 @@ class Dungeon():
                         time.sleep(1.5)
                         break
 
+                    self._hero.take_mana()
+                    self.move_enemy()
                     self._level_map[x][y] = "."
                     self._level_map[x + move_x][y + move_y] = "H"
-                    self._hero.take_mana(self._hero.mana_regeneration_rate)
-                    self.move_enemy()
 
                 else:
                     print("You can't go there!")
@@ -168,14 +168,17 @@ class Dungeon():
             b = enemy.coordinates[1]
             possible_directions = []
 
-            if a-1 >= 0 and self._level_map[a-1][b] != "#":
+            if a-1 >= 0 and self._level_map[a-1][b] not in ["#", 'E']:
                 possible_directions.append("up")
-            if a+1 < len(self._level_map) and self._level_map[a+1][b] != "#":
+            if a+1 < len(self._level_map) and self._level_map[a+1][b] not in ["#", 'E']:
                 possible_directions.append("down")
-            if b-1 >= 0 and self._level_map[a][b-1] != "#":
+            if b-1 >= 0 and self._level_map[a][b-1] not in ["#", 'E']:
                 possible_directions.append("left")
-            if b+1 < len(self._level_map[0]) and self._level_map[a][b+1] != "#":
+            if b+1 < len(self._level_map[0]) and self._level_map[a][b+1] not in ["#", 'E']:
                 possible_directions.append("right")
+
+            if len(possible_directions) == 0:
+                break
 
             rand_index = random.randint(0, len(possible_directions)-1)
 
@@ -206,3 +209,4 @@ class Dungeon():
 
             self._level_map[a][b] = "."
             self._level_map[a + move_a][b + move_b] = "E"
+            enemy.coordinates = [a + move_a, b + move_b]
