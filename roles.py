@@ -96,20 +96,15 @@ class Role:
     def attack(self, by=None):
         if by == 'weapon':
             if self._current_weapon != None:
-                weapon_to_use = self._current_weapon
-                self._current_weapon = None
-                return (weapon_to_use, weapon_to_use.damage)
+                return self._current_weapon.damage
             else:
-                return (None, 0)
+                return 0
 
         if by == 'magic':
             if self._current_spell != None:
-                self._current_mana -= self._current_spell.mana_cost
-                spell_to_use = self._current_spell
-                self._current_spell = None
-                return (spell_to_use, spell_to_use.damage)
+                return self._current_spell.damage
             else:
-                return (None, 0)
+                return 0
 
 
     @staticmethod
@@ -165,21 +160,18 @@ class Hero(Role):
             raise TypeError()
 
         if self.get_weapon_damage() > self.get_spell_damage():
-            weapon, damage = self.attack(by='weapon')
-            enemy.take_damage(damage)
-            print("Hero hits with {} for {} damage. Enemy health is {}".format(weapon.name, damage, enemy.current_health))
+            enemy.take_damage(self.attack(by='weapon'))
+            print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.name, self._current_weapon.damage, enemy.current_health))
 
         elif self._current_spell != None:
             if self.can_cast(self._current_spell):
-                spell, damage = self.attack(by='magic')
-                enemy.take_damage(damage)
-                print("Hero casts a {} for {} damage. Enemy health is {}".format(spell.name, damage, enemy.current_health))
+                enemy.take_damage(self.attack(by='magic'))
+                print("Hero casts a {} for {} damage. Enemy health is {}".format(self._current_spell.name, self._current_spell.damage, enemy.current_health))
             else:
                 print("Hero does not have mana for another {}.".format(self._current_spell))
                 if self._current_weapon != None:
-                    weapon, damage = self.attack(by='weapon')
-                    enemy.take_damage(damage)
-                    print("Hero hits with {} for {} damage. Enemy health is {}".format(weapon.name, damage, enemy.current_health))
+                    enemy.take_damage(self.attack(by='weapon'))
+                    print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.name, self._current_weapon.damage, enemy.current_health))
                 else:
                     print('Hero does not have any weapon to use!')
 
@@ -236,21 +228,18 @@ class Enemy(Role):
             raise TypeError()
 
         if self.get_weapon_damage() > self.get_spell_damage():
-            weapon, damage = self.attack(by='weapon')
-            hero.take_damage(damage)
-            print("Enemy hits with {} for {} damage. Hero health is {}".format(self.weapon.name, damage, hero.current_health))
+            hero.take_damage(self.attack(by='weapon'))
+            print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.name, self._current_weapon.damage, hero.current_health))
 
         elif self._current_spell != None:
             if self.can_cast(self._current_spell):
-                spell, damage = self.attack(by='magic')
-                hero.take_damage(damage)
-                print("Enemy casts a {} for {} damage. Hero health is {}".format(spell.name, damage, hero.current_health))
+                hero.take_damage(self.attack(by='magic'))
+                print("Enemy casts a {} for {} damage. Hero health is {}".format(self._current_spell.name, self._current_spell.damage, hero.current_health))
             else:
                 print("Enemy does not have mana for another {}.".format(self._current_spell))
                 if self._current_weapon != None:
-                    weapon, damage = self.attack(by='weapon')
-                    hero.take_damage(damage)
-                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self.weapon.name, damage, hero.current_health))
+                    hero.take_damage(self.attack(by='weapon'))
+                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.name, self._current_weapon.damage, hero.current_health))
                 else:
                     print('Enemy does not have any weapon to use!')
 
