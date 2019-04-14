@@ -116,6 +116,7 @@ class Dungeon():
 
                     self._level_map[x][y] = "."
                     self._level_map[x + move_x][y + move_y] = "H"
+                    self._hero.take_mana(self._hero.mana_regeneration_rate)
                     self.move_enemy()
 
                 else:
