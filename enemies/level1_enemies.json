@@ -1,27 +1,27 @@
 {
     "enemies": [
         {
-            "health": 50,
-            "mana": 50,
-            "damage": 20,
+            "health": 20,
+            "mana": 30,
+            "damage": 10,
             "coordinates": [
                 2,
                 5
             ]
         },
         {
-            "health": 50,
-            "mana": 50,
-            "damage": 20,
+            "health": 20,
+            "mana": 30,
+            "damage": 10,
             "coordinates": [
                 2,
                 9
             ]
         },
         {
-            "health": 50,
-            "mana": 50,
-            "damage": 20,
+            "health": 20,
+            "mana": 30,
+            "damage": 10,
             "coordinates": [
                 3,
                 2

@@ -1,54 +1,54 @@
 {
     "enemies": [
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 0,
                 1
             ]
         },
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 0,
                 5
             ]
         },
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 0,
                 9
             ]
         },
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 3,
                 3
             ]
         },
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 3,
                 8
             ]
         },
         {
-            "health": 100,
-            "mana": 100,
-            "damage": 60,
+            "health": 50,
+            "mana": 80,
+            "damage": 30,
             "coordinates": [
                 4,
                 0
