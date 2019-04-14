@@ -1,7 +1,8 @@
 import sys, tty, termios, subprocess, time, random, json
 from tools import Weapon, Spell
 from potions import ManaPotion, HealthPotion
-from roles import Enemy
+from roles import Hero, Enemy
+from fights import fight
 
 class _Getch:
     def __call__(self):
@@ -86,7 +87,7 @@ class Dungeon():
 
         return coor
 
-    def move_hero(self):
+    def move_hero(self, hero, enemy):
         key = _Getch()
 
         while self._hero.is_alive():
@@ -122,8 +123,9 @@ class Dungeon():
                         time.sleep(1.5)
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
-                        print("Fight!")
-                        time.sleep(1.5)
+                        if isinstance(hero, Hero) and isinstance(enemy, Enemy):
+                            fight(hero, enemy)
+                            time.sleep(1.5)
 
                     elif self._level_map[x + move_x][y + move_y] == "G":
                         self.goal_reached()
@@ -200,7 +202,6 @@ class Dungeon():
                 time.sleep(1.5)
 
             elif self._level_map[a + move_a][b + move_b] == "H":
-                print("Enemy Fight!")
                 time.sleep(1.5)
                 break
 
