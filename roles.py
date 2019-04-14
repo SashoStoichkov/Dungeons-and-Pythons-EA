@@ -104,6 +104,7 @@ class Role:
 
         if by == 'magic':
             if self._current_spell != None:
+                self._current_mana -= self._current_spell.mana_cost
                 spell_to_use = self._current_spell
                 self._current_spell = None
                 return spell_to_use.damage
@@ -160,17 +161,24 @@ class Hero(Role):
             self._current_mana += self._mana_regeneration_rate + mana_points
 
     def choose_attack(self, enemy):
-        if isinstance(enemy, Enemy):
-            if self.get_weapon_damage() > self.get_spell_damage():
-                    print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.__name__, self.get_weapon_damage(), enemy._current_health))
-                    enemy.take_damage(self.attack(by="weapon"))
-                
+        if not isinstance(enemy, Enemy):
+            raise TypeError()
+
+        if self.get_weapon_damage() > self.get_spell_damage():
+            enemy.take_damage(self.attack(by="weapon"))
+            print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.name, self.get_weapon_damage(), enemy._current_health))
+
+        elif self._current_spell != None:
+            if self.can_cast(self._current_spell):
+                enemy.take_damage(self.attack(by="magic"))
+                print("Hero casts a {} for {} damage. Enemy health is {}".format(self._current_spell.name, self.get_spell_damage(), enemy._current_health))
             else:
-                if self.can_cast(self._current_spell):
-                    print("Hero casts a {} for {} damage. Enemy health is {}".format(self._current_spell.__name__, self.get_spell_damage(), enemy._current_health))
-                    enemy.take_damage(self.attack(by="magic"))
+                print("Hero does not have mana for another {}.".format(self._current_spell))
+                if self._current_weapon != None:
+                    enemy.take_damage(self.attack(by="weapon"))
+                    print("Hero hits with {} for {} damage. Enemy health is {}".format(self._current_weapon.name, self.get_weapon_damage(), enemy._current_health))
                 else:
-                    print("Hero does not have mana for another {}.".format(self._current_spell))
+                    print('Hero does not have any weapon to use!')
 
     @staticmethod
     def validate_init_parameters(name, title, mana_regeneration_rate):
@@ -209,7 +217,7 @@ class Enemy(Role):
         if len(new_coordinates) != 2:
             raise ValueError('Enemy must have exactly 2 coordinates!')
 
-        self.coordinates = new_coordinates
+        self._coordinates = new_coordinates
 
     def take_mana(self, mana_points):
         if not isinstance(mana_points, int) and not isinstance(mana_points, float):
@@ -221,17 +229,28 @@ class Enemy(Role):
             self._current_mana += mana_points
 
     def choose_attack(self, hero):
-        if isinstance(hero, Hero):
-            if self.get_weapon_damage() > self.get_spell_damage():
-                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.__name__, self.get_weapon_damage(), hero._current_health))
-                    hero.take_damage(self.attack(by="weapon"))
-                
+        if not isinstance(hero, Hero):
+            raise TypeError()
+
+        if self.get_weapon_damage() > self.get_spell_damage():
+            hero.take_damage(self.attack(by="weapon"))
+            print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.name, self.get_weapon_damage(), enemy._current_health))
+
+        elif self._current_spell != None:
+            if self.can_cast(self._current_spell):
+                hero.take_damage(self.attack(by="magic"))
+                print("Enemy casts a {} for {} damage. Hero health is {}".format(self._current_spell.name, self.get_spell_damage(), enemy._current_health))
             else:
-                if self.can_cast(self._current_spell):
-                    print("Enemy casts a {} for {} damage. Hero health is {}".format(self._current_spell.__name__, self.get_spell_damage(), hero._current_health))
-                    hero.take_damage(self.attack(by="magic"))
+                print("Enemy does not have mana for another {}.".format(self._current_spell))
+                if self._current_weapon != None:
+                    hero.take_damage(self.attack(by="weapon"))
+                    print("Enemy hits with {} for {} damage. Hero health is {}".format(self._current_weapon.name, self.get_weapon_damage(), enemy._current_health))
                 else:
-                    print("Enemy does not have mana for another {}.".format(self._current_spell))
+                    print('Enemy does not have any weapon to use!')
+
+        else:
+            hero.take_damage(self._damage)
+            print('Enemy hits hero for {} damage. Hero health is {}.'. format(self._damage, hero.current_health))
 
     @staticmethod
     def validate_init_parameters(damage, coordinates):
