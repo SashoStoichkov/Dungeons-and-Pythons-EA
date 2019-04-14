@@ -1,40 +1,28 @@
 {
     "enemies": [
         {
-            "_max_health": 50,
-            "_current_health": 50,
-            "_max_mana": 50,
-            "_current_mana": 50,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 20,
-            "_coordinates": [
+            "health": 50,
+            "mana": 50,
+            "damage": 20,
+            "coordinates": [
                 2,
                 5
             ]
         },
         {
-            "_max_health": 50,
-            "_current_health": 50,
-            "_max_mana": 50,
-            "_current_mana": 50,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 20,
-            "_coordinates": [
+            "health": 50,
+            "mana": 50,
+            "damage": 20,
+            "coordinates": [
                 2,
                 9
             ]
         },
         {
-            "_max_health": 50,
-            "_current_health": 50,
-            "_max_mana": 50,
-            "_current_mana": 50,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 20,
-            "_coordinates": [
+            "health": 50,
+            "mana": 50,
+            "damage": 20,
+            "coordinates": [
                 3,
                 2
             ]

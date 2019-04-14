@@ -1,79 +1,55 @@
 {
     "enemies": [
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 0,
                 1
             ]
         },
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 0,
                 5
             ]
         },
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 0,
                 9
             ]
         },
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 3,
                 3
             ]
         },
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 3,
                 8
             ]
         },
         {
-            "_max_health": 100,
-            "_current_health": 100,
-            "_max_mana": 100,
-            "_current_mana": 100,
-            "_current_weapon": null,
-            "_current_spell": null,
-            "_damage": 60,
-            "_coordinates": [
+            "health": 100,
+            "mana": 100,
+            "damage": 60,
+            "coordinates": [
                 4,
                 0
             ]
