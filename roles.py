@@ -97,6 +97,7 @@ class Role:
         if by == 'weapon':
             if self._current_weapon != None:
                 weapon_to_use = self._current_weapon
+                self._current_weapon = None
                 return (weapon_to_use, weapon_to_use.damage)
             else:
                 return (None, 0)
@@ -105,6 +106,7 @@ class Role:
             if self._current_spell != None:
                 self._current_mana -= self._current_spell.mana_cost
                 spell_to_use = self._current_spell
+                self._current_spell = None
                 return (spell_to_use, spell_to_use.damage)
             else:
                 return (None, 0)
