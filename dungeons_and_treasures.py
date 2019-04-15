@@ -125,13 +125,15 @@ class Dungeon():
                     
                     if self._level_map[x + move_x][y + move_y] == "T":
                         self.pick_treasure()
-                        time.sleep(1.5)
+                        time.sleep(2)
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
                         enemy = self.identify_enemy([x + move_x, y + move_y])
+                        print(enemy.coordinates)
+                        time.sleep(2)
                         if fight(self._hero, enemy) == 1:
                             self._enemies.remove(enemy)
-                            time.sleep(1.5)
+                            time.sleep(3)
                         else:
                             sys.exit(0)
 
@@ -141,9 +143,11 @@ class Dungeon():
                         break
 
                     self._hero.take_mana()
-                    self.move_enemy()
                     self._level_map[x][y] = "."
                     self._level_map[x + move_x][y + move_y] = "H"
+                    subprocess.call(["clear"])
+                    self.print_map()
+                    self.move_enemy()
 
                 else:
                     print("You can't go there!")
@@ -188,7 +192,7 @@ class Dungeon():
                 possible_directions.append("right")
 
             if len(possible_directions) == 0:
-                break
+                continue
 
             rand_index = random.randint(0, len(possible_directions)-1)
 
@@ -206,17 +210,27 @@ class Dungeon():
                 move_b = -1
 
             if self._level_map[a + move_a][b + move_b] == "T":
+                self._level_map[a][b] = "."
+                self._level_map[a + move_a][b + move_b] = "E"
+                enemy.coordinates = [a + move_a, b + move_b]
                 # print("Enemy found treasure!")
                 # time.sleep(1.5)
-                break
 
             elif self._level_map[a + move_a][b + move_b] == "H":
+                print(enemy.coordinates)
+                time.sleep(1.5)
                 if fight(self._hero, enemy) == 1:
                     self._enemies.remove(enemy)
+                    self._level_map[a][b] = '.'
                     time.sleep(1.5)
-                else:
-                    sys.exit(0)
 
-            self._level_map[a][b] = "."
-            self._level_map[a + move_a][b + move_b] = "E"
-            enemy.coordinates = [a + move_a, b + move_b]
+                else:
+                    self._level_map[a][b] = "."
+                    self._level_map[a + move_a][b + move_b] = "E"
+                    enemy.coordinates = [a + move_a, b + move_b]
+                    sys.exit(0)
+            
+            else:
+                self._level_map[a][b] = "."
+                self._level_map[a + move_a][b + move_b] = "E"
+                enemy.coordinates = [a + move_a, b + move_b]
