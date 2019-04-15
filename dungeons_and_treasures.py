@@ -124,7 +124,7 @@ class Dungeon():
                 if x + move_x >= 0 and x + move_x < len(self._level_map) and y + move_y >= 0 and y + move_y < len(self._level_map[0]) and self._level_map[x + move_x][y + move_y] != '#':
                     
                     if self._level_map[x + move_x][y + move_y] == "T":
-                        self.pick_treasure()
+                        self._hero.pick_treasure(self._treasures_list)
                         time.sleep(2)
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
@@ -155,20 +155,20 @@ class Dungeon():
                 print("Invalid key!")
                 time.sleep(1.5)
 
-    def pick_treasure(self):
-        treasure = random.choice(self._treasures_list)
-        if isinstance(treasure, Weapon):
-            self._hero.equip(treasure)
-            print('Found {}'.format(str(treasure)))
-        if isinstance(treasure, Spell):
-            self._hero.learn(treasure)
-            print('Found {}'.format(str(treasure)))
-        if isinstance(treasure, HealthPotion):
-            self._hero.take_healing(treasure.points)
-            print('Found health potion. Hero\'s health is now {}'.format(self._hero.current_health))
-        if isinstance(treasure, ManaPotion):
-            self._hero.take_mana(treasure.points)
-            print('Found mana potion. Hero\'s mana is now {}'.format(self._hero.current_mana))
+    # def pick_treasure(self):
+    #     treasure = random.choice(self._treasures_list)
+    #     if isinstance(treasure, Weapon):
+    #         self._hero.equip(treasure)
+    #         print('Found {}'.format(str(treasure)))
+    #     if isinstance(treasure, Spell):
+    #         self._hero.learn(treasure)
+    #         print('Found {}'.format(str(treasure)))
+    #     if isinstance(treasure, HealthPotion):
+    #         self._hero.take_healing(treasure.points)
+    #         print('Found health potion. Hero\'s health is now {}'.format(self._hero.current_health))
+    #     if isinstance(treasure, ManaPotion):
+    #         self._hero.take_mana(treasure.points)
+    #         print('Found mana potion. Hero\'s mana is now {}'.format(self._hero.current_mana))
 
     def goal_reached(self):
         print("You reached the goal! CONGRATS!")
@@ -211,8 +211,7 @@ class Dungeon():
                 self._level_map[a][b] = "."
                 self._level_map[a + move_a][b + move_b] = "E"
                 enemy.coordinates = [a + move_a, b + move_b]
-                # print("Enemy found treasure!")
-                # time.sleep(1.5)
+                enemy.pick_treasure(self._treasures_list)
 
             elif self._level_map[a + move_a][b + move_b] == "H":
                 if fight(self._hero, enemy) == 1:

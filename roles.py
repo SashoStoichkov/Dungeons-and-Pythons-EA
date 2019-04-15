@@ -1,4 +1,6 @@
 from tools import Weapon, Spell
+from potions import HealthPotion, ManaPotion
+import random
 
 class Role:
 
@@ -175,6 +177,22 @@ class Hero(Role):
                 else:
                     print('Hero does not have any weapon to use!')
 
+    def pick_treasure(self, treasures_list):
+        treasure = random.choice(treasures_list)
+        if isinstance(treasure, Weapon):
+            self.equip(treasure)
+            print('Found {}'.format(str(treasure)))
+        if isinstance(treasure, Spell):
+            self.learn(treasure)
+            print('Found {}'.format(str(treasure)))
+        if isinstance(treasure, HealthPotion):
+            self.take_healing(treasure.points)
+            print('Found health potion. Hero\'s health is now {}'.format(self._current_health))
+        if isinstance(treasure, ManaPotion):
+            self.take_mana(treasure.points)
+            print('Found mana potion. Hero\'s mana is now {}'.format(self._current_mana))
+
+
     @staticmethod
     def validate_init_parameters(name, title, mana_regeneration_rate):
         if not isinstance(name, str):
@@ -245,6 +263,18 @@ class Enemy(Role):
         else:
             hero.take_damage(self._damage)
             print('Enemy hits hero for {} damage. Hero health is {}.'. format(self._damage, hero.current_health))
+
+    def pick_treasure(self, treasures_list):
+        treasure = random.choice(treasures_list)
+        if isinstance(treasure, Weapon):
+            self.equip(treasure)
+        if isinstance(treasure, Spell):
+            self.learn(treasure)
+        if isinstance(treasure, HealthPotion):
+            self.take_healing(treasure.points)
+        if isinstance(treasure, ManaPotion):
+            self.take_mana(treasure.points)
+
 
     @staticmethod
     def validate_init_parameters(damage, coordinates):
