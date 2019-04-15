@@ -129,8 +129,6 @@ class Dungeon():
 
                     elif self._level_map[x + move_x][y + move_y] == "E":
                         enemy = self.identify_enemy([x + move_x, y + move_y])
-                        print(enemy.coordinates)
-                        time.sleep(2)
                         if fight(self._hero, enemy) == 1:
                             self._enemies.remove(enemy)
                             time.sleep(3)
@@ -217,8 +215,6 @@ class Dungeon():
                 # time.sleep(1.5)
 
             elif self._level_map[a + move_a][b + move_b] == "H":
-                print(enemy.coordinates)
-                time.sleep(1.5)
                 if fight(self._hero, enemy) == 1:
                     self._enemies.remove(enemy)
                     self._level_map[a][b] = '.'
