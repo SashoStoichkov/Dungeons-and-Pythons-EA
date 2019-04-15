@@ -1,4 +1,4 @@
-from dungeons_and_treasures import *
+from dungeons import *
 from roles import Hero
 
 if __name__ == "__main__":
