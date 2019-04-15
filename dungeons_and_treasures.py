@@ -184,7 +184,7 @@ class Dungeon():
                 possible_directions.append("up")
             if a+1 < len(self._level_map) and self._level_map[a+1][b] not in ["#", 'E', 'G']:
                 possible_directions.append("down")
-            if b-1 >= 0 and self._level_map[a][b-1] not in ["#", 'E']:
+            if b-1 >= 0 and self._level_map[a][b-1] not in ["#", 'E', 'G']:
                 possible_directions.append("left")
             if b+1 < len(self._level_map[0]) and self._level_map[a][b+1] not in ["#", 'E', 'G']:
                 possible_directions.append("right")
